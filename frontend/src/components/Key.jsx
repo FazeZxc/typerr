@@ -12,11 +12,9 @@ export const Key = ({ children, pressedKey }) => {
     }
     return color;
   }
-
   useEffect(() => {
     const color = getRandomColor();
     setRandomColor(color);
-    console.log(randomColor);
     if (children === pressedKey) {
       document.getElementById(children).style.backgroundColor = color;
     } else {
