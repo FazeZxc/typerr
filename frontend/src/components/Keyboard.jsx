@@ -27,14 +27,14 @@ export const Keyboard = () => {
   function handleInputChange(e) {
     const { value } = e.target;
     setUserInput(value);
-    const typedWords = value.trim().split(/\s+/);    
+    const typedWords = value.trim().split(/\s+/);
     const correctWords = typedWords.filter((word, index) => {
       return word === text.split(/\s+/)[index];
     }).length;
-  
+
     const newAccuracy = (correctWords / typedWords.length) * 100;
     setAccuracy(newAccuracy);
-  
+
     const timeDiff = (Date.now() - startTime) / 60000;
     const newWPM = (typedWords.length / timeDiff) * 60;
     setWpm(newWPM);
