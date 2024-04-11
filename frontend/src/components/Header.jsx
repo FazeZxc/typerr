@@ -5,7 +5,7 @@ export const Header = () => {
   return (
     <div className="pt-8 px-8 flex flex-row justify-between items-end">
       <div className="flex flex-row items-end gap-4">
-        <div className="text-Primary2 text-8xl">typerr</div>
+        <div className="text-Primary2 text-8xl selection:hidden">typerr</div>
         <div className="h-8 w-8">
           <svg onClick={()=>{
             navigate("/")

@@ -90,7 +90,7 @@ export const Keyboard = () => {
         onChange={handleInputChange}
         className="mb-4 p-2 border border-gray-400 rounded-xl w-[700px] h-auto text-black font-semibold text-2xl"
       ></input>
-      <div className="flex flex-col gap-2 border-4 rounded-xl p-4 border-blue-400">
+      <div className="flex flex-col gap-2 border-4 border-Secondary2 rounded-xl p-4 border-blue-400">
         {keys.map((row, rowIndex) => (
           <div key={rowIndex} className="flex justify-center gap-2">
             {row.map((key, index) => (
