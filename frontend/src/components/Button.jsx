@@ -1,13 +1,24 @@
-import { useState } from "react"
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 
-export const Button = ({children , version}) =>{
-    const [variant , setVariant] = useState("primary")
-    if(version == "primary"){
-        setVariant("bg-green-400")
-    }else if(version == "destructive"){
-        setVariant("bg-red-400")
+export const Button = ({ children, version, onClick }) => {
+  const [variant, setVariant] = useState("primary");
+
+  useEffect(() => {
+    if (version == "primary") {
+      setVariant("bg-Primary");
+    } else if (version == "destructive") {
+      setVariant("bg-Secondary");
     }
-    return <div className={variant + "rounded-lg p-2 w-[70px] text-center"}>
-        {children}
+  }, [version]);
+  return (
+    <div
+      id={version}
+      onClick={onClick}
+      className={`${variant} rounded-lg p-2 w-[70px] text-center cursor-pointer selection:hidden`}
+    >
+      {" "}
+      {children}
     </div>
-}
+  );
+};

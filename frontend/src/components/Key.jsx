@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
 export const Key = ({ children, pressedKey }) => {
-  const [randomColor, setRandomColor] = useState("#");
-
   function getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -14,16 +12,18 @@ export const Key = ({ children, pressedKey }) => {
   }
   useEffect(() => {
     const color = getRandomColor();
-    setRandomColor(color);
     if (children === pressedKey) {
       document.getElementById(children).style.backgroundColor = color;
     } else {
-      document.getElementById(children).style.backgroundColor = "#ffffff"; 
+      document.getElementById(children).style.backgroundColor = "#ffffff";
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pressedKey]);
   return (
-    <div id={children} className="flex items-center justify-center border border-gray-500 rounded-md h-10 w-10">
+    <div
+      id={children}
+      className="flex items-center justify-center border border-gray-500 rounded-md h-10 w-10"
+    >
       {children}
     </div>
   );

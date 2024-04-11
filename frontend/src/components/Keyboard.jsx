@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Key } from "./Key";
 import { Button } from "./Button";
-
+import { faker } from "@faker-js/faker";
+import { useSetRecoilState } from "recoil";
+import { accuracyAtom, wpmAtom } from "../store/score";
+import { useNavigate } from "react-router-dom";
 const keys = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -15,33 +18,49 @@ export const Keyboard = () => {
   const [userInput, setUserInput] = useState("");
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
-  const [accuracy, setAccuracy] = useState(0);
-  const [wpm, setWpm] = useState(0);
-
+  const setAccuracy = useSetRecoilState(accuracyAtom);
+  const setWpm = useSetRecoilState(wpmAtom);
+  const [isStarted, setIsStarted] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef(null);
+  const navigate = useNavigate();
   function handleInputChange(e) {
     const { value } = e.target;
     setUserInput(value);
-    const correctChars = text.slice(0, value.length);
-    const correctCount = correctChars
-      .split("")
-      .filter((char, index) => char === value[index]).length;
-    const newAccuracy = (correctCount / text.length) * 100;
+    const typedWords = value.trim().split(/\s+/);    
+    const correctWords = typedWords.filter((word, index) => {
+      return word === text.split(/\s+/)[index];
+    }).length;
+  
+    const newAccuracy = (correctWords / typedWords.length) * 100;
     setAccuracy(newAccuracy);
-    const timeDiff = (endTime - startTime) / 60000;
-    const typedWords = value.trim().split(/\s+/).length;
-    const newWPM = typedWords / timeDiff;
+  
+    const timeDiff = (Date.now() - startTime) / 60000;
+    const newWPM = (typedWords.length / timeDiff) * 60;
     setWpm(newWPM);
   }
+
   function handleStart(e) {
+    setIsStarted(true);
+    inputRef.current.focus();
+    setIsFocused(true);
     setStartTime(Date.now());
   }
   function handleEnd(e) {
+    setIsStarted(false);
     setEndTime(Date.now());
+    navigate("/result");
   }
   function clickHandler(e) {
+    if (e.key === " ") {
+      setUserInput("");
+    }
     SetPressedKey(e.key.toUpperCase());
   }
-
+  useEffect(() => {
+    const fakeText = faker.lorem.paragraph(5);
+    setText(fakeText);
+  }, []);
   useEffect(() => {
     // eslint-disable-next-line no-empty
     if (startTime && endTime) {
@@ -49,21 +68,28 @@ export const Keyboard = () => {
   }, [startTime, endTime]);
 
   return (
-    <div className="flex flex-col items-center">
-      <textarea
+    <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-row gap-4 selection:hidden">
+        <Button version="primary" onClick={handleStart}>
+          START
+        </Button>
+        <Button version="destructive" onClick={handleEnd}>
+          END
+        </Button>
+      </div>
+      <label className="text-Secondary font-semibold text-2xl w-[900px]">
+        {text}
+      </label>
+      <input
+        type="text"
+        ref={inputRef}
+        disabled={!isStarted}
         value={userInput}
         autoFocus
-        placeholder={text}
         onKeyDown={clickHandler}
         onChange={handleInputChange}
-        className="mb-4 p-2 border border-gray-400 rounded-xl w-[800px] h-[500px]"
-      ></textarea>
-      <Button variant="primary" onClick={handleStart}>
-        START
-      </Button>
-      <Button variant="destructive" onClick={handleEnd}>
-        END
-      </Button>
+        className="mb-4 p-2 border border-gray-400 rounded-xl w-[700px] h-auto text-black font-semibold text-2xl"
+      ></input>
       <div className="flex flex-col gap-2 border-4 rounded-xl p-4 border-blue-400">
         {keys.map((row, rowIndex) => (
           <div key={rowIndex} className="flex justify-center gap-2">
@@ -75,8 +101,6 @@ export const Keyboard = () => {
           </div>
         ))}
       </div>
-      <div>Accuracy: {accuracy.toFixed(2)}</div>
-      <div>WPM: {wpm.toFixed(2)}</div>
     </div>
   );
 };
