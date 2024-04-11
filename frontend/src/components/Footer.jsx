@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <div className="flex flex-row gap-4 justify-between px-[400px]">
+    <div className="flex flex-row gap-4 justify-between px-[200px]">
       <div
         onClick={() => {
           window.location.href = "https://github.com/FazeZxc/typerr";

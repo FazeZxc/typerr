@@ -2,22 +2,22 @@ export const Login = () => {
   function submit() {}
   return (
     <div>
-      <div className="flex flex-row w-[400px] justify-between items-end">
-        <span className="text-Primary2 text-4xl py-2">login</span>
-        <span className="text-Secondary2 opacity-50 text-2xl hover:underline">
+      <div className="flex flex-row w-[300px] justify-between items-end">
+        <span className="text-Primary2 text-2xl py-2">login</span>
+        <span className="text-Secondary2 opacity-50 text-xl hover:underline">
           <a href="#forget">forget password?</a>
         </span>
       </div>
-      <form className="flex flex-col w-[400px] gap-4">
+      <form className="flex flex-col w-[300px] gap-4">
         <input
           type="text"
           placeholder="email"
-          className="bg-[#272727] text-Primary2 text-2xl selection:bg-none p-2 rounded-2xl"
+          className="bg-[#272727] text-Primary2 text-xl selection:bg-none p-2 rounded-xl"
         ></input>
         <input
           type="password"
           placeholder="password"
-          className="bg-[#272727] text-Primary2 text-2xl  selection:bg-none p-2 rounded-2xl"
+          className="bg-[#272727] text-Primary2 text-xl selection:bg-none p-2 rounded-xl"
         ></input>
         <div className="flex flex-row gap-2">
           <input
@@ -25,17 +25,17 @@ export const Login = () => {
             id="rememberMe"
             name="rememberMe"
             value="rememberMe"
-            className="w-4 text-Primary2 text-2xl bg-[#272727]"
+            className="w-3 text-Primary2 text-xl bg-[#272727]"
           ></input>
-          <label htmlFor="rememberMe" className="text-Primary2 text-2xl">
+          <label htmlFor="rememberMe" className="text-Primary2 text-xl">
             Remember me
           </label>
         </div>
         <button
           onClick={submit}
-          className="w-[400px] p-2 bg-[#272727] text-Primary flex flex-row gap-4 hover:bg-[#fff] hover:text-Secondary rounded-2xl items-center justify-center"
+          className="w-[300px] p-2 bg-[#272727] text-Primary flex flex-row gap-2 hover:bg-[#fff] hover:text-Secondary rounded-xl items-center justify-center"
         >
-          <div className="size-10">
+          <div className="size-5">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path
                 fill="#8e7ab5"
@@ -43,7 +43,7 @@ export const Login = () => {
               />
             </svg>
           </div>
-          <p className="text-3xl font-semibold">Sign in</p>
+          <p className="text-xl font-semibold">Sign in</p>
         </button>
       </form>
     </div>
