@@ -34,7 +34,7 @@ export const SignUp = () => {
 
         <button
           onClick={submit}
-          className="w-[400px] p-2 text-Primary flex flex-row gap-4 hover:bg-[#fff] hover:text-Secondary rounded-2xl items-center justify-center"
+          className="w-[400px] p-2 bg-[#272727] text-Primary flex flex-row gap-4 hover:bg-[#fff] hover:text-Secondary rounded-2xl items-center justify-center"
         >
           <div className="size-10">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">

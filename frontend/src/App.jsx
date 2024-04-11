@@ -5,6 +5,7 @@ import { Scoreboard } from "./pages/Scoreboard";
 import { Header } from "./components/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Auth } from "./pages/Auth";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
@@ -12,9 +13,36 @@ function App() {
       <RecoilRoot>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<><Header></Header><Hero></Hero></>}></Route>
-            <Route path="/auth" element={<><Header></Header><Auth></Auth></>}></Route>
-            <Route path="/result" element={<><Header></Header><Scoreboard></Scoreboard></>}></Route>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Header></Header>
+                  <Hero></Hero>
+                  <Footer></Footer>
+                </>
+              }
+            ></Route>
+            <Route
+              path="/auth"
+              element={
+                <>
+                  <Header></Header>
+                  <Auth></Auth>
+                  <Footer></Footer>
+                </>
+              }
+            ></Route>
+            <Route
+              path="/result"
+              element={
+                <>
+                  <Header></Header>
+                  <Scoreboard></Scoreboard>
+                  <Footer></Footer>
+                </>
+              }
+            ></Route>
           </Routes>
         </BrowserRouter>
       </RecoilRoot>

@@ -4,8 +4,8 @@ export const Login = () => {
     <div>
       <div className="flex flex-row w-[400px] justify-between items-end">
         <span className="text-Primary2 text-4xl py-2">login</span>
-        <span className="text-Secondary2 opacity-50 text-2xl">
-          <a href="#forget">Forget password?</a>
+        <span className="text-Secondary2 opacity-50 text-2xl hover:underline">
+          <a href="#forget">forget password?</a>
         </span>
       </div>
       <form className="flex flex-col w-[400px] gap-4">
@@ -25,7 +25,7 @@ export const Login = () => {
             id="rememberMe"
             name="rememberMe"
             value="rememberMe"
-            className="w-4 text-Primary2 text-2xl"
+            className="w-4 text-Primary2 text-2xl bg-[#272727]"
           ></input>
           <label htmlFor="rememberMe" className="text-Primary2 text-2xl">
             Remember me
@@ -33,7 +33,7 @@ export const Login = () => {
         </div>
         <button
           onClick={submit}
-          className="w-[400px] p-2 text-Primary flex flex-row gap-4 hover:bg-[#fff] hover:text-Secondary rounded-2xl items-center justify-center"
+          className="w-[400px] p-2 bg-[#272727] text-Primary flex flex-row gap-4 hover:bg-[#fff] hover:text-Secondary rounded-2xl items-center justify-center"
         >
           <div className="size-10">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

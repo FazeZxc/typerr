@@ -21,6 +21,7 @@ export const Keyboard = () => {
   const setAccuracy = useSetRecoilState(accuracyAtom);
   const setWpm = useSetRecoilState(wpmAtom);
   const [isStarted, setIsStarted] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ export const Keyboard = () => {
           END
         </Button>
       </div>
-      <label className="text-Secondary font-semibold text-2xl w-[900px]">
+      <label className="text-Secondary2 font-semibold text-2xl w-[900px] selection:hidden ">
         {text}
       </label>
       <input
