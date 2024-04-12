@@ -5,7 +5,7 @@ export const Footer = () => {
         onClick={() => {
           window.location.href = "https://github.com/FazeZxc/typerr";
         }}
-        className="flex flex-row text-Secondary gap-2 opacity-50 hover:opacity-100 cursor-pointer"
+        className="flex flex-row text-Secondary gap-2 opacity-50 hover:opacity-100 cursor-pointer items-end"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +24,7 @@ export const Footer = () => {
         onClick={() => {
           window.location.href = "https://linkedin.com/in/abhinavmsn/";
         }}
-        className="flex flex-row text-Secondary gap-2 opacity-50 hover:opacity-100 cursor-pointer"
+        className="flex flex-row text-Secondary gap-2 opacity-50 hover:opacity-100 cursor-pointer items-end"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

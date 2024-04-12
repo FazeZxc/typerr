@@ -40,7 +40,7 @@ export const Header = () => {
       setIsLoggedIn(false);
     }
   }, []);
-  
+
   async function handleLogout() {
     const response = await fetch(backendUrl + "/api/v1/logOut", {
       method: "GET",

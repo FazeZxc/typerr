@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Loader } from "./Loader";
 const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 export const SignUp = () => {
   const [firstName, setUsername] = useState("");
@@ -8,7 +8,7 @@ export const SignUp = () => {
   const [verifyEmail, setVerifyEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const navigate = useNavigate();
+  const [isLoading, setIsloading] = useState(false);
   function usernameChange(e) {
     const { value } = e.target;
     setUsername(value);
@@ -30,8 +30,11 @@ export const SignUp = () => {
     setConfirmPassword(value);
   }
 
-  function submit(e) {
+  async function submit(e) {
+    setIsloading(true);
     e.preventDefault();
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    setIsloading(false);
     if (verifyEmail === email) {
       axios
         .post(backendUrl + "/api/v1/signUp", {
@@ -40,7 +43,9 @@ export const SignUp = () => {
           password: password,
           confirmPassword: confirmPassword,
         })
-        .then((response) => {})
+        .then((response) => {
+          console.log(response);
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -94,15 +99,23 @@ export const SignUp = () => {
           onClick={submit}
           className="w-[300px] p-2 bg-[#272727] text-Primary flex flex-row gap-2 hover:bg-[#fff] hover:text-Secondary rounded-2xl items-center justify-center"
         >
-          <div className="size-5">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-              <path
-                fill="#907ab5"
-                d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
-              />
-            </svg>
-          </div>
-          <p className="text-xl font-semibold">Sign Up</p>
+          {!isLoading ? (
+            <>
+              <div className="size-5">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                  <path
+                    fill="#907ab5"
+                    d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
+                  />
+                </svg>
+              </div>
+              <p className="text-xl font-semibold">Sign Up</p>
+            </>
+          ) : (
+            <div className="w-[300px] flex flex-row justify-center items-center h-8 p-1">
+              <Loader></Loader>
+            </div>
+          )}
         </button>
       </form>
     </div>

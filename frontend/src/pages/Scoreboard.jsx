@@ -15,11 +15,11 @@ export const Scoreboard = () => {
       <div className="flex flex-col justify-center items-center text-2xl gap-2">
         <div className="flex flex-col justify-center items-center">
           <label className="text-Secondary">wpm</label>
-          <div className="text-Primary text-8xl">{wpm}</div>
+          <div className="text-Primary text-8xl">{wpm.toFixed(2)}</div>
         </div>
         <div className="flex flex-col justify-center items-center">
           <label className="text-Secondary">accuracy</label>
-          <div className="text-Primary text-8xl">{accuracy}</div>
+          <div className="text-Primary text-8xl">{accuracy.toFixed(2)}</div>
         </div>
       </div>
     </div>

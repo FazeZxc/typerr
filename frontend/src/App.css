@@ -1,4 +1,27 @@
-body{
-    background-color: #323437;
-    overflow: hidden;
+body {
+  background-color: #323437;
+  overflow: hidden;
+}
+span {
+  font-size: 20px;
+  user-select: none;
+  cursor: text;
+  color: "#8E7AB5";
+}
+span.wrong {
+  color: darkred;
+  background-color: rgb(194, 12, 42);
+}
+
+span.correct {
+  color: #0e630e;
+  background: #316a02;
+}
+
+span.active {
+  border-bottom: 3px solid #0a6bf9;
+}
+
+input-field {
+  color: "#EEA5A6";
 }

@@ -15,7 +15,7 @@ export const Button = ({ children, version, onClick }) => {
     <div
       id={version}
       onClick={onClick}
-      className={`${variant} rounded-lg p-2 w-[70px] text-center cursor-pointer selection:hidden opacity-50 hover:opacity-100`}
+      className={`${variant} rounded-lg p-2 w-[150px] text-[#fff] text-center cursor-pointer selection:hidden opacity-100 hover:opacity-80`}
     >
       {" "}
       {children}
