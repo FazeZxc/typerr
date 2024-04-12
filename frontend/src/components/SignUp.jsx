@@ -1,5 +1,53 @@
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 export const SignUp = () => {
-  function submit() {}
+  const [firstName, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [verifyEmail, setVerifyEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+  function usernameChange(e) {
+    const { value } = e.target;
+    setUsername(value);
+  }
+  function emailChange(e) {
+    const { value } = e.target;
+    setEmail(value);
+  }
+  function checkEmail(e) {
+    const { value } = e.target;
+    setVerifyEmail(value);
+  }
+  function passwordChange(e) {
+    const { value } = e.target;
+    setPassword(value);
+  }
+  function confirmPasswordChange(e) {
+    const { value } = e.target;
+    setConfirmPassword(value);
+  }
+
+  function submit(e) {
+    e.preventDefault();
+    if (verifyEmail === email) {
+      axios
+        .post(backendUrl + "/api/v1/signUp", {
+          firstName: firstName,
+          email: email,
+          password: password,
+          confirmPassword: confirmPassword,
+        })
+        .then((response) => {})
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.error("Email not matched");
+    }
+  }
   return (
     <div>
       <div className="flex flex-row w-[400px] justify-between items-end">
@@ -8,26 +56,36 @@ export const SignUp = () => {
       <form className="flex flex-col w-[300px] gap-4">
         <input
           type="text"
+          value={firstName}
+          onChange={usernameChange}
           placeholder="username"
           className="bg-[#272727] text-Primary2 text-xl selection:bg-none p-2 rounded-xl"
         ></input>
         <input
           type="text"
+          value={email}
+          onChange={emailChange}
           placeholder="email"
           className="bg-[#272727] text-Primary2 text-xl selection:bg-none p-2 rounded-xl"
         ></input>
         <input
           type="text"
+          value={verifyEmail}
+          onChange={checkEmail}
           placeholder="verify email"
           className="bg-[#272727] text-Primary2 text-xl selection:bg-none p-2 rounded-xl"
         ></input>
         <input
           type="password"
+          value={password}
+          onChange={passwordChange}
           placeholder="password"
           className="bg-[#272727] text-Primary2 text-xl selection:bg-none p-2 rounded-xl"
         ></input>
         <input
           type="password"
+          value={confirmPassword}
+          onChange={confirmPasswordChange}
           placeholder="verify password"
           className="bg-[#272727] text-Primary2 text-xl selection:bg-none p-2 rounded-xl"
         ></input>
@@ -44,7 +102,7 @@ export const SignUp = () => {
               />
             </svg>
           </div>
-          <p className="text-xl font-semibold">Sign in</p>
+          <p className="text-xl font-semibold">Sign Up</p>
         </button>
       </form>
     </div>

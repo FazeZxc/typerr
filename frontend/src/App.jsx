@@ -3,11 +3,12 @@ import "./App.css";
 import { Hero } from "./pages/Hero";
 import { Scoreboard } from "./pages/Scoreboard";
 import { Header } from "./components/Header";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { Auth } from "./pages/Auth";
 import { Footer } from "./components/Footer";
+import { useEffect } from "react";
 
-function App() {
+function App() { 
   return (
     <div>
       <RecoilRoot>

@@ -1,5 +1,55 @@
+import axios from "axios";
+import {  useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { userAtom } from "../store/user";
+
+// eslint-disable-next-line no-undef
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
+console.log(backendUrl);
 export const Login = () => {
-  function submit() {}
+  const [userEmailInput, setUserEmailInput] = useState("");
+  const [userPasswordInput, setUserPasswordInput] = useState("");
+  const setUser = useSetRecoilState(userAtom);
+  const navigate = useNavigate();
+
+  function handleEmailInputChange(e) {
+    const { value } = e.target;
+    setUserEmailInput(value);
+    console.log(value);
+  }
+  function handlePasswordInputChange(e) {
+    const { value } = e.target;
+    setUserPasswordInput(value);
+    console.log(value);
+  }
+  async function submit(e) {
+    e.preventDefault();
+    axios
+      .post(
+        backendUrl + "/api/v1/signin",
+        {
+          email: userEmailInput,
+          password: userPasswordInput,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        setUser(response.data.user);
+        console.log(response.data.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <div>
       <div className="flex flex-row w-[300px] justify-between items-end">
@@ -10,11 +60,15 @@ export const Login = () => {
       </div>
       <form className="flex flex-col w-[300px] gap-4">
         <input
+          value={userEmailInput}
+          onChange={handleEmailInputChange}
           type="text"
           placeholder="email"
           className="bg-[#272727] text-Primary2 text-xl selection:bg-none p-2 rounded-xl"
         ></input>
         <input
+          value={userPasswordInput}
+          onChange={handlePasswordInputChange}
           type="password"
           placeholder="password"
           className="bg-[#272727] text-Primary2 text-xl selection:bg-none p-2 rounded-xl"

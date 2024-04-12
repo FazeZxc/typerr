@@ -9,4 +9,5 @@ router.get("/getData",auth,getData);
 router.post("/deleteData",auth,deleteData);
 
 
+
 module.exports = router;
